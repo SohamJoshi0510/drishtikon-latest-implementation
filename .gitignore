@@ -1,0 +1,14 @@
+*.env
+*.mp3
+*.jpg
+*.png
+*.json
+*.exe
+venv/
+*cred/
+__pycache__/
+yolo/runs/
+yolo/datasets/
+audio_files/
+annotated_images/
+results/
