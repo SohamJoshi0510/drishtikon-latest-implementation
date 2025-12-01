@@ -240,6 +240,7 @@ def main():
                     continue
                 vision_time_start = time.time()
                 raw_text = extract_text_with_google_vision(frame) or "No text detected"
+                print(raw_text)
                 vision_time_end = time.time()
                 print(f"Time taken by Google Vision API: {vision_time_end - vision_time_start}")
 
