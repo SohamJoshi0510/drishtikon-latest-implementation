@@ -188,12 +188,7 @@ def main():
 
     # 3. Gemini prompt (customizable)
     refinement_prompt = f"""
-                    If the image contains:
-                    A lot of text => SUMMARIZE contextual elements in 20 WORDS, then include the complete, UNSUMMARIZED text content.
-                    Medical text => Issue alarms and include UNSUMMARIZED text.
-                    Little text => SUMMARIZE contextual elements along with text in 25 WORDS.
-                    No text => Say "NO TEXT FOUND." and SUMMARIZE the visual in 15 WORDS.
-                    DO NOT include asterisks, quotes, or any formatting.
+                Following is an image captured by a blind person smartphone.. please help me read this book by extracting the exact text content. Do not change a word.
                     """
 
     speak("Processing the image. Please wait.")
