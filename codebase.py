@@ -1,11 +1,7 @@
 import os
 import re
-import time
-cwd = os.getcwd()
-print(cwd)
-# count = 0
 
-def create_req(file):
+def create_requirements(file):
     with open(file, 'r') as fileObject:
         lines = fileObject.readlines()
         cleaned = "".join(lines).split('\n')[2:]
@@ -42,7 +38,5 @@ def listChildren(filepath):
             print(absolutePath)
     count += 1
 
-# listChildren(cwd)
-create_req(os.path.join(cwd, "requirements.txt"))
-# print(count)
-        
+import os
+create_requirements(os.path.join(os.getcwd(), 'requirements.txt'))
