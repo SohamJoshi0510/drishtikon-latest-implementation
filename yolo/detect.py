@@ -182,8 +182,9 @@ def main():
 
     speak("Press Y for YOLO detection, G for Gemini summary, Q to exit.")
 
+    display_frame = img
     while True:
-        cv2.imshow("YOLO Detection", img)
+        cv2.imshow("YOLO Detection", display_frame)
         key = cv2.waitKey(1) & 0xFF
 
         if key == ord('q'):
@@ -197,21 +198,33 @@ def main():
         if key == ord('y'):
             t0 = time.time()
 
+            # Run YOLO
             results = model.predict(img, verbose=False)
-            annotated = results[0].plot()
-            annotated_bgr = cv2.cvtColor(annotated, cv2.COLOR_RGB2BGR)
 
-            desc = describe_yolo([box.cls[0] for box in results[0].boxes],
-                                 results[0].names)
+            # Plot YOLO detections
+            annotated = results[0].plot()                  # This is RGB
+
+
+            # Update the display frame so it stays visible
+            display_frame = annotated
+
+            # Extract labels + positions
+            classes = [box.cls[0] for box in results[0].boxes] if results[0].boxes else []
+            desc = describe_yolo(classes, results[0].names)
             pos_desc = positional_descriptions(results)
 
             t1 = time.time()
             duration = round(t1 - t0, 2)
 
+            # Log detection
             log("YOLO", fp, f"{desc} | {pos_desc}", duration)
 
+            # Show annotated image
+            cv2.imshow("YOLO Detection", display_frame)
+
+            # Speak results
             speak(desc + " " + pos_desc)
-            cv2.imshow("YOLO Detection", annotated_bgr)
+
 
         # GEMINI SUMMARY
         if key == ord('g'):
